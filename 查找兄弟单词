@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+bool isBrother(string objString, string testString)
+{
+    sort(objString.begin(), objString.end());
+    sort(testString.begin(), testString.end());
+    return testString == objString;
+}
+
+int main() {
+    int n;
+    int m;
+    string str2;
+    while (cin >> n) {
+        int count = 0;
+        vector<string> vs;
+        for (int i = 0; i < n; i++) {
+            string str1;
+            cin >> str1;
+            vs.push_back(str1);
+        }
+        cin >> str2 >> m;
+        
+        sort(vs.begin(), vs.end());
+        
+        string sBrother;
+        for (int i = 0; i < n; i++) {
+            if (vs[i] != str2 && isBrother(str2, vs[i])) {
+                count++;
+                if (count == m)
+                    sBrother = vs[i];
+            }
+        }
+        cout << count << endl;
+        if (count >= m)
+            cout << sBrother << endl;
+    }
+    return 0;
+}
